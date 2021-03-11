@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>ACTB Connection Portal</title>
+        <style>
+            h1 { color: #006666; 
+                 font-family: Verdana;
+                 text-align: center;
+            }
+            body { background-color: #EED426; }
+        </style>
+    </head>
+    
+    <body>
+            <h1>ACTB Connection Portal</h1>
+            <form>
+            <center>
+            <table>
+                <tr>
+                    <td>Customer Name</td>
+                    <td>
+                        <input type="text" id = "custname" name = "custname" placeholder="Enter the customer name" pattern = "[a-zA-z.-]{1,}$" required />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Customer Email</td>
+                    <td>
+                        <input type = "text" id = "email" name = "email" placeholder="abc@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\[a-z]{2,}$" required />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Mobile Number</td>
+                    <td>
+                        <input type = "text" id = "mobile" name = "mobile" placeholder="Enter the Mobile Number" pattern = "^[789]\d{9}$" maxlength="10" required />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Type of Broadband</td>
+                    <td>
+                        <select id = "connectiontype" name="conntype" required>
+                            <option value = "Pre">Pre</option>
+                            <option value = "Post">Post</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Scheme Name</td>
+                    <td>
+                        <input type = "radio" id = "scheme1" name = "scheme" value = "Local" required />Local
+                        <input type = "radio" id = "scheme2" name = "scheme" value = "STD" required /> STD
+                        <input type = "radio" id = "scheme3" name = "scheme" value = "FullTalkTime" required /> FullTalkTime
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Connection Duration</td>
+                    <td>
+                        <input type = "number" id = "duration" name = "duration" min = "1" max = "12" required />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button type = "button" name = "submit" onclick="Fun_Bill()">Calculate Bill Amount</button>
+                    </td>
+                    <td>
+                        <input type = "reset" name = "clear" />
+                    </td>
+                </tr>
+            </table>
+            <div id = "result"></div>
+    
+            <table border = 1 id = "rentalcost" name = "rentalcost">
+               <caption>Rental Cost Table</caption>
+                <tr>
+                    <th>Connection Type</th>
+                    <th>Call Limit</th>
+                    <th>Monthly Rental</th>
+                </tr>
+                <tr>
+                    <td>Pre</td>
+                    <td>500</td>
+                    <td>75</td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td>Unlimited</td>
+                    <td>150</td>
+                </tr>
+            </table>
+        </center>
+        </form>
+        <script>
+           function Fun_Bill() {
+               var scheme = 0;
+               if(document.getElementById("scheme1").checked) {
+                   scheme = 200;
+               } else if(document.getElementById("scheme2").checked){
+                   scheme = 350;
+               } else {
+                    scheme = 500;
+               }
+
+               var contype = 0;
+               if(document.getElementById("connectiontype").value == "Pre") {
+                   contype = 75;
+               } else {
+                   contype = 150;
+               }
+               
+               var duration = document.getElementById("duration").value;
+               
+               var result = (duration*scheme)+contype;
+               var str = "The Total Monthly Rental Cost is Rs. " + result;
+               
+               document.getElementById("result").innerHTML = str;
+           }
+        </script>
+    </body>
+</html>
